@@ -1,61 +1,59 @@
-const input = document.querySelector("input");
-const list = document.querySelector(".list");
-const addBtn = document.querySelector("#addBtn");
-const clearBtn = document.querySelector(".clearBtn");
-const check = document.querySelectorAll(".check");
-const trash = document.querySelectorAll(".trash");
+const ul = document.querySelector("[data-ul-container]");
+const input = document.querySelector("[data-input]");
+const add = document.querySelector("[data-add]");
 
-addBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (input.value !== "") {
-    const newUl = document.createElement("ul");
+function makeTask() {
+  if (input.value == "") return;
+  let li = `<li>
+              <button class="material-symbols-rounded">circle</button>
+              <span data-input-value>${input.value}</span>
+              <button id="delete" class="material-symbols-rounded">delete</button>
+            </li>`;
 
-    const newLi = document.createElement("li");
-    newLi.textContent = input.value;
-
-    const newP = document.createElement("p");
-    newP.textContent = "radio_button_unchecked";
-
-    const newTrshBtn = document.createElement("button");
-    newTrshBtn.textContent = "close";
-
-    newP.classList.add("material-symbols-outlined");
-    newTrshBtn.classList.add("trash", "material-symbols-outlined");
-
-    newUl.appendChild(newP);
-    newUl.appendChild(newLi);
-    newUl.appendChild(newTrshBtn);
-    list.appendChild(newUl);
-
-    newTrshBtn.addEventListener("click", () => {
-      newUl.remove();
-    });
-
-    newP.addEventListener("click", () => {
-      newP.classList.toggle("check");
-      newLi.classList.toggle("checked");
-      newUl.classList.toggle("ulChecked");
-      if (newP.textContent === "done") {
-        return (newP.textContent = "radio_button_unchecked");
-      }
-      newP.textContent = "done";
-    });
-    newLi.addEventListener("click", () => {
-      newP.classList.toggle("check");
-      newLi.classList.toggle("checked");
-      newUl.classList.toggle("ulChecked");
-      if (newP.textContent === "done") {
-        return (newP.textContent = "radio_button_unchecked");
-      }
-      newP.textContent = "done";
-    });
-  }
+  ul.insertAdjacentHTML("beforeend", li);
   input.value = "";
-});
+}
 
-clearBtn.addEventListener("click", () => {
-  const ulChecked = document.querySelectorAll(".ulChecked");
-  ulChecked.forEach((ulChecked) => {
-    ulChecked.remove();
-  });
+function deleteTask(task) {
+  task.remove();
+}
+
+function checkTask(button, nextSibling) {
+  nextSibling.classList.toggle("line-through");
+  if (button.textContent == "circle") {
+    button.textContent = "check";
+  } else {
+    button.textContent = "circle";
+  }
+}
+
+function checkFromSpan(span, previousElement) {
+  span.classList.toggle("line-through");
+  if (previousElement.textContent == "circle") {
+    previousElement.textContent = "check";
+  } else {
+    previousElement.textContent = "circle";
+  }
+}
+
+function taskButtons(e) {
+  const nextSibling = e.target.nextElementSibling;
+  const previousElement = e.target.previousElementSibling;
+
+  if (e.target.textContent == "delete") {
+    deleteTask(e.target.parentElement);
+  }
+  if (e.target.textContent == "circle" || e.target.textContent == "check") {
+    checkTask(e.target, nextSibling);
+  }
+
+  if (e.target.tagName == "SPAN") {
+    checkFromSpan(e.target, previousElement);
+    console.log(previousElement);
+  }
+}
+
+add.addEventListener("click", makeTask);
+ul.addEventListener("click", (e) => {
+  taskButtons(e);
 });
