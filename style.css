@@ -61,7 +61,7 @@ ul {
   gap: var(--gap--default);
   border-radius: var(--border-radius-default);
   padding: 0.66rem;
-  background-color: var(--coloraccent1);
+  background-color: var(--coloraccent3);
   box-shadow: 0 0 2.5em 1em rgba(0, 0, 0, 0.1);
 }
 
@@ -74,14 +74,14 @@ input[type="text"] {
   border-radius: var(--border-radius-default);
 }
 
-aside {
+form {
   display: grid;
   grid-template-columns: 8.5fr 1.5fr;
   gap: 0.5rem;
   background: none;
 }
 
-aside button {
+form button {
   cursor: pointer;
   border: none;
   border-radius: var(--border-radius-default);
@@ -90,11 +90,11 @@ aside button {
   transition: transform 0.1s ease-in-out, border 0.1s ease-in-out, filter 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
-aside button:hover {
+form button:hover {
   filter: brightness(125%);
 }
 
-aside button:active {
+form button:active {
   background-color: var(--coloraccent3);
   transform: translateY(5%);
   border-bottom: 5px solid var(--coloraccent3);
@@ -124,7 +124,7 @@ li {
   justify-content: center;
   align-items: center;
   padding-inline: 0.75rem;
-  background-color: var(--coloraccent3);
+  background-color: var(--coloraccent2);
   border-radius: var(--border-radius-default);
 }
 

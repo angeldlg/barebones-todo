@@ -1,8 +1,9 @@
 const ul = document.querySelector("[data-ul-container]");
 const input = document.querySelector("[data-input]");
-const add = document.querySelector("[data-add]");
+const form = document.querySelector("[data-form]");
 
-function makeTask() {
+function makeTask(e) {
+  e.preventDefault();
   if (input.value == "") return;
   let li = `<li>
               <button class="material-symbols-rounded">circle</button>
@@ -53,7 +54,7 @@ function taskButtons(e) {
   }
 }
 
-add.addEventListener("click", makeTask);
+form.addEventListener("submit", makeTask);
 ul.addEventListener("click", (e) => {
   taskButtons(e);
 });
