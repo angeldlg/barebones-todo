@@ -3,6 +3,7 @@ const input = document.querySelector("[data-input]");
 const form = document.querySelector("[data-form]");
 const clearButton = document.querySelector("[data-clear-completed]");
 const clearAllButton = document.querySelector("[data-clear-all]");
+input.value = "";
 
 function makeTask(e) {
   e.preventDefault();
@@ -15,10 +16,6 @@ function makeTask(e) {
 
   ul.insertAdjacentHTML("beforeend", li);
   input.value = "";
-}
-
-function deleteTask(task) {
-  task.remove();
 }
 
 function checkTask(button, nextSibling) {
@@ -48,7 +45,7 @@ function taskButtons(e) {
   const previousSibling = e.target.previousElementSibling;
 
   if (e.target.textContent == "delete") {
-    deleteTask(e.target.parentElement);
+    e.target.parentElement.remove();
   }
   if (e.target.textContent == "circle" || e.target.textContent == "check") {
     checkTask(e.target, nextSibling);
