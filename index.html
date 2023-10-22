@@ -22,17 +22,23 @@
 <body>
   <h1>to do list</h1>
   <main>
-    <ul data-ul-container>
-      <!-- <li>
-        <button class="material-symbols-rounded">check</button>
-        <span data-input-value class="line-through">make bed</span>
-        <button id="delete" class="material-symbols-rounded">delete</button>
-      </li>
-      <li>
-        <button class="material-symbols-rounded">circle</button>
-        <span>drink water</span>
-        <button id="delete" class="material-symbols-rounded">delete</button>
-      </li> -->
+    <div>
+      <ul data-ul-container>
+        <li data-li-task>
+          <button data-check="true" class="material-symbols-rounded">check</button>
+          <span data-input-value class="line-through">make bed</span>
+          <button id="delete" class="material-symbols-rounded">delete</button>
+        </li>
+        <li data-li-task>
+          <button data-check="false" class="material-symbols-rounded">circle</button>
+          <span>drink water</span>
+          <button id="delete" class="material-symbols-rounded">delete</button>
+        </li>
+    </div>
+    <aside>
+      <button class="options" data-clear-completed>clear completed</button>
+      <button class="options" data-clear-all>clear all</button>
+    </aside>
     </ul>
     <form data-form>
       <input type="text" placeholder="add your task" data-input>

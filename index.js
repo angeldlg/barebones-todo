@@ -1,12 +1,14 @@
 const ul = document.querySelector("[data-ul-container]");
 const input = document.querySelector("[data-input]");
 const form = document.querySelector("[data-form]");
+const clearButton = document.querySelector("[data-clear-completed]");
+const clearAllButton = document.querySelector("[data-clear-all]");
 
 function makeTask(e) {
   e.preventDefault();
   if (input.value == "") return;
-  let li = `<li>
-              <button class="material-symbols-rounded">circle</button>
+  let li = `<li data-li-task>
+              <button data-check-button class="material-symbols-rounded">circle</button>
               <span data-input-value>${input.value}</span>
               <button id="delete" class="material-symbols-rounded">delete</button>
             </li>`;
@@ -22,24 +24,28 @@ function deleteTask(task) {
 function checkTask(button, nextSibling) {
   nextSibling.classList.toggle("line-through");
   if (button.textContent == "circle") {
+    button.setAttribute("data-check", true);
     button.textContent = "check";
   } else {
+    button.setAttribute("data-check", false);
     button.textContent = "circle";
   }
 }
 
-function checkFromSpan(span, previousElement) {
+function checkFromSpan(span, previousSibling) {
   span.classList.toggle("line-through");
-  if (previousElement.textContent == "circle") {
-    previousElement.textContent = "check";
+  if (previousSibling.textContent == "circle") {
+    previousSibling.setAttribute("data-check", true);
+    previousSibling.textContent = "check";
   } else {
-    previousElement.textContent = "circle";
+    previousSibling.setAttribute("data-check", true);
+    previousSibling.textContent = "circle";
   }
 }
 
 function taskButtons(e) {
   const nextSibling = e.target.nextElementSibling;
-  const previousElement = e.target.previousElementSibling;
+  const previousSibling = e.target.previousElementSibling;
 
   if (e.target.textContent == "delete") {
     deleteTask(e.target.parentElement);
@@ -49,12 +55,28 @@ function taskButtons(e) {
   }
 
   if (e.target.tagName == "SPAN") {
-    checkFromSpan(e.target, previousElement);
-    console.log(previousElement);
+    checkFromSpan(e.target, previousSibling);
   }
 }
 
+function clearCompleted() {
+  const checked = document.querySelectorAll('[data-check="true"]');
+  checked.forEach((z) => {
+    z.parentElement.remove();
+  });
+}
+
+function clearAll() {
+  const li = document.querySelectorAll("[data-li-task]");
+
+  li.forEach((x) => {
+    x.remove();
+  });
+}
+
 form.addEventListener("submit", makeTask);
+clearButton.addEventListener("click", clearCompleted);
+clearAllButton.addEventListener("click", clearAll);
 ul.addEventListener("click", (e) => {
   taskButtons(e);
 });

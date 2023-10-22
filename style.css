@@ -29,18 +29,20 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-weight: 200;
-  background-color: var(--body-background-color);
-  color: var(--body-textcolor);
   text-decoration: none;
   list-style: none;
   user-select: none;
+  color: var(--body-textcolor);
 }
 
 body {
+  background-color: var(--body-background-color);
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
+
   gap: 2rem;
   height: 100vh;
 }
@@ -48,21 +50,34 @@ body {
 main {
   display: flex;
   flex-flow: column;
-  height: 450px;
-  width: 400px;
   gap: var(--gap--default);
+
   background: none;
+  min-width: 300px;
+  width: 99vw;
+  max-width: 420px;
+}
+
+main div {
+  box-shadow: 0 0 2.5em 1em rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-default);
+  background-color: var(--coloraccent3);
+  padding: .66rem;
 }
 
 ul {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   flex-flow: column;
   gap: var(--gap--default);
-  border-radius: var(--border-radius-default);
-  padding: 0.66rem;
-  background-color: var(--coloraccent3);
-  box-shadow: 0 0 2.5em 1em rgba(0, 0, 0, 0.1);
+
+  height: 400px;
+  background: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+  scrollbar-color: var(--coloraccent3) var(--coloraccent3);
+  scrollbar-width: thin;
 }
 
 input[type="text"] {
@@ -78,35 +93,56 @@ form {
   display: grid;
   grid-template-columns: 8.5fr 1.5fr;
   gap: 0.5rem;
+
   background: none;
 }
 
 form button {
   cursor: pointer;
   border: none;
-  border-radius: var(--border-radius-default);
+
   background-color: var(--coloraccent2);
+  border-radius: var(--border-radius-default);
   border-bottom: 5px solid var(--coloraccent3);
-  transition: transform 0.1s ease-in-out, border 0.1s ease-in-out, filter 0.1s ease-in-out, background-color 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 form button:hover {
-  filter: brightness(125%);
+  background-color: var(--coloraccent7);
 }
 
 form button:active {
+  transform: translateY(10%);
   background-color: var(--coloraccent3);
-  transform: translateY(5%);
   border-bottom: 5px solid var(--coloraccent3);
+}
+
+ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-inline: 0.75rem;
+  background-color: var(--coloraccent2);
+  border-radius: var(--border-radius-default);
+  transition: all 0.1s ease-in-out;
 }
 
 li button {
   cursor: pointer;
+  background: none;
   border: none;
+
   padding: 0.5rem;
   border-radius: 100%;
+  transition: all 0.1s ease-in-out;
+}
+
+span {
+  flex: 1;
+  cursor: pointer;
+  padding: 0.75rem;
   background: none;
-  transition: background-color 0.1s ease-in-out, transform 0.2s ease-in-out;
 }
 
 #delete:hover {
@@ -118,22 +154,32 @@ li button {
   background-color: rgba(252, 134, 134, 0.5);
 }
 
-li {
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
-  justify-content: center;
-  align-items: center;
-  padding-inline: 0.75rem;
-  background-color: var(--coloraccent2);
-  border-radius: var(--border-radius-default);
+.line-through {
+  text-decoration: line-through;
 }
 
-span {
-  cursor: pointer;
-  padding: 0.75rem;
+aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap--default);
+
   background: none;
 }
 
-.line-through {
-  text-decoration: line-through;
+.options {
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  max-width: fit-content;
+  transition: all 10ms ease-in;
+}
+
+.options:hover {
+  text-decoration: underline;
+}
+
+.options:active {
+  text-shadow: 0 0 5px var(--text-color);
 }
