@@ -90,6 +90,4 @@ function clearAll() {
 form.addEventListener("submit", makeTask);
 clearButton.addEventListener("click", clearCompleted);
 clearAllButton.addEventListener("click", clearAll);
-ul.addEventListener("click", (e) => {
-  taskButtons(e);
-});
+ul.addEventListener("click", (e) => taskButtons(e));
