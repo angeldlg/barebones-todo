@@ -27,12 +27,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-weight: 200;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   text-decoration: none;
   list-style: none;
   user-select: none;
   color: var(--body-textcolor);
+}
+
+h1 {
+  font-weight: bold;
 }
 
 body {
@@ -43,26 +47,28 @@ body {
   align-items: center;
   flex-flow: column;
 
-  gap: 2rem;
+  gap: var(--gap--default);
   height: 100vh;
 }
 
 main {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-flow: column;
   gap: var(--gap--default);
 
   background: none;
-  min-width: 300px;
-  width: 99vw;
-  max-width: 420px;
 }
 
 main div {
+  min-width: 300px;
+  width: 95vw;
+  max-width: 400px;
   box-shadow: 0 0 2.5em 1em rgba(0, 0, 0, 0.1);
   border-radius: var(--border-radius-default);
   background-color: var(--coloraccent3);
-  padding: .66rem;
+  padding: 0.66rem;
 }
 
 ul {
@@ -90,6 +96,9 @@ input[type="text"] {
 }
 
 form {
+  min-width: 300px;
+  width: 95vw;
+  max-width: 400px;
   display: grid;
   grid-template-columns: 8.5fr 1.5fr;
   gap: 0.5rem;
@@ -100,6 +109,7 @@ form {
 form button {
   cursor: pointer;
   border: none;
+  width: 48px;
 
   background-color: var(--coloraccent2);
   border-radius: var(--border-radius-default);
@@ -135,7 +145,7 @@ li button {
 
   padding: 0.5rem;
   border-radius: 100%;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 span {
