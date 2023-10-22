@@ -3,4 +3,4 @@ Basic to-do list application that allows users to add and remove tasks, check an
 
 [Try it here!](https://angeldlg.github.io/barebones-todo/)
 
-![Untitled](https://github.com/angeldlg/barebones-todo/assets/44849133/5f38c348-e78b-46ba-bc91-79852cf8e5e1)
+![to-do list](https://github.com/angeldlg/barebones-todo/assets/44849133/2d0425a9-2c0b-4f7b-8cac-2b788545cb09)
