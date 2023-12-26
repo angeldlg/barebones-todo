@@ -1,93 +1,91 @@
-const ul = document.querySelector('[data-ul-container]')
-const input = document.querySelector('[data-input]')
-const form = document.querySelector('[data-form]')
-const clearButton = document.querySelector('[data-clear-completed]')
-const clearAllButton = document.querySelector('[data-clear-all]')
+class UI {
+  static initItems() {
+    const taskForm = document.querySelector('[data-task-form]')
+    const clearAllButton = document.querySelector('[data-clear-all]')
+    const clearCompletedButton = document.querySelector('[data-clear-completed]')
+    clearCompletedButton.addEventListener('click', TaskManager.deleteCompletedTasks)
+    clearAllButton.addEventListener('click', TaskManager.deleteAllTasks)
+    taskForm.addEventListener('submit', UI.handleTaskForm)
+    UI.renderTasks()
+  }
 
-// Function to create a new task
-function makeTask(e) {
-  e.preventDefault()
-  if (input.value == '') return
+  static handleTaskForm(e) {
+    if (e.target[0].value) TaskManager.addTask(e.target[0].value, Date.now())
+    e.target[0].value = null
+    e.preventDefault()
+  }
 
-  // Create the HTML for a new task item
-  let li = `<li data-li-task>
-              <button data-check-button class="material-symbols-rounded">circle</button>
-              <span data-input-value>${input.value}</span>
-              <button id="delete" class="material-symbols-rounded">delete</button>
-            </li>`
+  static renderTasks() {
+    UI.deleteTasks()
+    TaskManager.getTaskList().forEach((task) => {
+      const taskTemplate = document.querySelector('[data-task-template]')
+      const taskElement = document.importNode(taskTemplate.content, true)
+      const deleteButton = taskElement.querySelector('[data-delete-button]')
+      const checkboxInput = taskElement.querySelector('[data-task-checkbox]')
+      const taskText = taskElement.querySelector('[data-input-value]')
+      const taskList = document.querySelector('[data-tasks-ul]')
+      checkboxInput.addEventListener('change', TaskManager.checkTask)
+      deleteButton.addEventListener('click', TaskManager.deleteTask)
+      deleteButton.id = task.id
+      checkboxInput.id = task.id
+      checkboxInput.checked = task.completed
+      taskText.append(task.name)
+      taskList.appendChild(taskElement)
+    })
+  }
 
-  // Add the new task to the task list
-  ul.insertAdjacentHTML('beforeend', li)
-  input.value = ''
-}
-
-// Function to toggle the completion status of a task
-function checkTask(button, nextSibling) {
-  nextSibling.classList.toggle('line-through')
-
-  // Toggle the icon and update the data attribute
-  if (button.textContent == 'circle') {
-    button.setAttribute('data-check', true)
-    button.textContent = 'check'
-  } else {
-    button.setAttribute('data-check', false)
-    button.textContent = 'circle'
+  static deleteTasks() {
+    const taskList = document.querySelector('[data-tasks-ul]')
+    while (taskList.firstChild) {
+      taskList.removeChild(taskList.firstChild)
+    }
   }
 }
 
-// Function to toggle the completion status of a task from the span element
-function checkFromSpan(span, previousSibling) {
-  span.classList.toggle('line-through')
-
-  // Toggle the icon and update the data attribute
-  if (previousSibling.textContent == 'circle') {
-    previousSibling.setAttribute('data-check', true)
-    previousSibling.textContent = 'check'
-  } else {
-    previousSibling.setAttribute('data-check', true)
-    previousSibling.textContent = 'circle'
+class Task {
+  constructor(name, id) {
+    this.id = id
+    this.name = name
+    this.completed = false
   }
 }
 
-// Function to handle task buttons (check, delete)
-function taskButtons(e) {
-  const nextSibling = e.target.nextElementSibling
-  const previousSibling = e.target.previousElementSibling
+class TaskManager {
+  static taskList = [
+    { id: 1, name: 'Finish the to do app', completed: true },
+    { id: 2, name: 'Reach the end of thought', completed: false },
+  ]
 
-  // Check if the clicked element is a delete button
-  if (e.target.textContent == 'delete') {
-    e.target.parentElement.remove()
+  static addTask(name, id) {
+    TaskManager.taskList.push(new Task(name, id))
+    UI.renderTasks()
   }
 
-  // Check if the clicked element is a check or circle button
-  if (e.target.textContent == 'circle' || e.target.textContent == 'check') {
-    checkTask(e.target, nextSibling)
+  static deleteTask(e) {
+    const selectedTask = TaskManager.taskList.find((task) => Number(e.target.id) === task.id)
+    const index = TaskManager.taskList.findIndex((task) => task === selectedTask)
+
+    TaskManager.taskList.splice(index, 1)
+    UI.renderTasks()
   }
 
-  // Check if the clicked element is a span (task text)
-  if (e.target.tagName == 'SPAN') {
-    checkFromSpan(e.target, previousSibling)
+  static checkTask(e) {
+    const selectedTask = TaskManager.taskList.find((task) => Number(e.target.id) === task.id)
+    selectedTask.completed = e.target.checked
   }
+
+  static deleteAllTasks() {
+    TaskManager.taskList = []
+    UI.renderTasks()
+  }
+
+  static deleteCompletedTasks() {
+    const uncompletedTasks = TaskManager.taskList.filter((task) => !task.completed)
+    TaskManager.taskList = uncompletedTasks
+    UI.renderTasks()
+  }
+
+  static getTaskList = () => TaskManager.taskList
 }
 
-// Function to clear completed tasks
-function clearCompleted() {
-  const checked = document.querySelectorAll('[data-check="true"]')
-  checked.forEach((z) => {
-    z.parentElement.remove()
-  })
-}
-
-// Function to clear all tasks
-function clearAll() {
-  const li = document.querySelectorAll('[data-li-task]')
-  li.forEach((x) => {
-    x.remove()
-  })
-}
-
-// Event listeners
-form.addEventListener('submit', makeTask)
-clearButton.addEventListener('click', clearCompleted)
-clearAllButton.addEventListener('click', clearAll)
-ul.addEventListener('click', (e) => taskButtons(e))
+UI.initItems()

@@ -2,51 +2,46 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>to do app</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="index.js"></script>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-  <style>
-    .material-symbols-rounded {
-      font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 200, "opsz" 20;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>to do app</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="icons/favicon.png" type="image/x-icon">
+	<script defer type="module" src="index.js"></script>
 </head>
 
 <body>
-  <main>
-    <h1>to-do list</h1>
-    <div>
-      <ul data-ul-container>
-        <li data-li-task>
-          <button data-check="true" class="material-symbols-rounded">check</button>
-          <span data-input-value class="line-through">make bed</span>
-          <button id="delete" class="material-symbols-rounded">delete</button>
-        </li>
-        <li data-li-task>
-          <button data-check="false" class="material-symbols-rounded">circle</button>
-          <span>drink water</span>
-          <button id="delete" class="material-symbols-rounded">delete</button>
-        </li>
-      </ul>
-    </div>
-  </main>
-  <form data-form>
-    <input type="text" placeholder="add your task" data-input>
-    <button type="submit" class="material-symbols-rounded">add</button>
-  </form>
-  <aside>
-    <button class="options" data-clear-completed>clear completed</button>
-    <button class="options" data-clear-all>clear all</button>
-  </aside>
+	<header>
+		<h2>to-do list</h2>
+	</header>
+	<!-- tasks -->
+	<main class="tasks">
+		<ul data-tasks-ul class="tasks__list">
+		</ul>
+	</main>
+	<!-- form -->
+	<form data-task-form class="task-form">
+		<input data-task-text type="text" placeholder="add your task" class="task-form__input">
+		<button class="task-form__sumbit"></button>
+	</form>
+	<!-- clear -->
+	<aside class="clear-tasks">
+		<span>clear</span>
+		<button data-clear-all class="clear-tasks__button">all</button>
+		<span class="clear-tasks__or">or</span>
+		<button data-clear-completed class="clear-tasks__button">completed</button>
+	</aside>
+	<!--  -->
+	<template data-task-template>
+		<li data-task-li class="tasks__item">
+			<label class="tasks__label">
+				<input data-task-checkbox type="checkbox" class="tasks__input">
+				<span class="tasks__checkbox"></span>
+				<span data-input-value class="tasks__text"></span>
+			</label>
+			<button data-delete-button class="tasks__delete"></button>
+		</li>
+	</template>
 </body>
 
 </html>
