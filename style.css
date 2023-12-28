@@ -92,7 +92,7 @@ header {
 
   border-radius: 99%;
   border: 1px solid var(--border-clr);
-  background: no-repeat top/0% url(icons/check.svg);
+  background: no-repeat top/0% url(/check.svg);
   transition:
     background var(--normal-transition-time) ease,
     transform var(--normal-transition-time) ease;
@@ -118,7 +118,7 @@ header {
 
 .tasks__input:checked~.tasks__checkbox {
   border: none;
-  background: no-repeat center/100% url(icons/check.svg);
+  background: no-repeat center/100% url(/check.svg);
   background-color: var(--task-checked-clr);
 }
 
@@ -134,7 +134,7 @@ header {
   height: 2rem;
   border-radius: 99%;
   aspect-ratio: 1 / 1;
-  background: no-repeat center/75% url(icons/delete.svg);
+  background: no-repeat center/75% url(/delete.svg);
 }
 
 .tasks__item:hover .tasks__delete {
@@ -163,7 +163,7 @@ header {
 
   cursor: pointer;
   border-bottom-right-radius: var(--border-radius);
-  background: no-repeat center/50% url(icons/up.svg);
+  background: no-repeat center/50% url(/up.svg);
   transition: var(--normal-transition-time);
 }
 
