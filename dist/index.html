@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>barebones to do</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+  <script type="module" crossorigin src="/assets/index-OLTczXiI.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-fPk_TaTx.css">
+</head>
+
+<body>
+  <header>
+    <h1>to do</h1>
+  </header>
+  <!-- tasks -->
+  <main class="tasks">
+    <ul data-tasks-ul class="tasks__list">
+    </ul>
+  </main>
+  <!-- form -->
+  <form data-task-form class="task-form">
+    <input data-task-text type="text" placeholder="add your task" class="task-form__input">
+    <button class="task-form__sumbit"></button>
+  </form>
+  <!-- clear -->
+  <aside class="clear-tasks">
+    <span>clear</span>
+    <button data-clear-all class="clear-tasks__button">all</button>
+    <span class="clear-tasks__or">or</span>
+    <button data-clear-completed class="clear-tasks__button">completed</button>
+  </aside>
+  <!--  -->
+  <template data-task-template>
+    <li data-task-li class="tasks__item">
+      <label class="tasks__label">
+        <input data-task-checkbox type="checkbox" class="tasks__input">
+        <span class="tasks__checkbox"></span>
+        <span class="tasks__text"></span>
+      </label>
+      <button data-delete-button class="tasks__delete"></button>
+    </li>
+  </template>
+</body>
+
+</html>
