@@ -31,6 +31,7 @@ export default class TaskManager {
   static deleteCompletedTasks() {
     const uncompletedTasks = TaskManager.taskList.filter(task => !task.completed)
     TaskManager.taskList = uncompletedTasks
+    UI.renderTasks()
   }
 
   static getTaskList = () => TaskManager.taskList
