@@ -3,4 +3,4 @@ This is a basic to-do list app that supports basic functionalities like adding t
 
 [Try it here!](https://angeldlg.github.io/barebones-todo/)
 
-![image](https://github.com/angeldlg/barebones-todo/assets/44849133/c670b3c9-30cf-49d1-8efa-d2d62e3194b9)
+![image](https://github.com/angeldlg/barebones-todo/assets/44849133/ad2593f4-fae7-4139-8296-c1d9d55db348)
